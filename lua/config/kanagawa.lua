@@ -13,4 +13,13 @@ require('kanagawa').setup({
             }
         }
     },
+    overrides = function(color)
+        local theme = require('kanagawa')._CURRENT_THEME
+        if theme ~= "wave" then
+            return {}
+        end
+        return {
+            ["@lsp.type.comment"] = { fg = color.palette.fujiGray }, -- Comment
+        }
+    end,
 })
