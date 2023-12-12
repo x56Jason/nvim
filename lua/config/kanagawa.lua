@@ -4,8 +4,8 @@ require('kanagawa').setup({
             sumiInk3 = "#000000", -- wave theme background
             waveRed = "#e2a478", -- wave theme 'PreProc' highlight group
             dragonBlack3 = "#000000", -- dragon theme background
-            oldWhite = "#a9b1d6",
---            fujiWhite = "#c0caf5",
+            carpYellow = "#c5c9c5",
+            surimiOrange = "#e2a478",
         },
         theme = {
             all = {
