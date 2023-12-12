@@ -1,6 +1,6 @@
 require'mycolorscheme'.set_colorscheme_flavour({
-	"catppuccin-mocha",
 	"kanagawa-wave",
+	"catppuccin-mocha",
 	"kanagawa-dragon",
 	"catppuccin-frappe",
 	"catppuccin-macchiato",
