@@ -16,16 +16,11 @@ vim.g.maplocalleader = ' '
 
 require('lazy').setup("plugins")
 
-require("configs")
-
 -- Vim mappings, see lua/config/which.lua for more mappings
 require("mappings")
 
 -- All non plugin related (vim) options
 require("options")
-
--- Enable favorable colorscheme from installed ones
-require("colorscheme")
 
 -- Vim autocommands/autogroups
 --require("autocmd")
