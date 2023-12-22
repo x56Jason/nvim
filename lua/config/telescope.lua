@@ -10,10 +10,48 @@ function my_scroll_preview_page(prompt_bufnr, direction)
 end
 
 function my_scroll_results_page(prompt_bufnr, direction)
-	local status = require "telescope.state".get_status(prompt_bufnr)
-	status.picker.layout_config.scroll_speed = vim.api.nvim_win_get_height(status.layout.results.winid)
+	local state = require "telescope.state".get_status(prompt_bufnr)
+	local picker = state.picker
+	local status_updater = picker:get_status_updater(picker.prompt_win, picker.prompt_bufnr)
+
+	picker.layout_config.scroll_speed = vim.api.nvim_win_get_height(state.layout.results.winid)
 	require "telescope.actions.set".scroll_results(prompt_bufnr, direction)
-	status.picker.layout_config.scroll_speed = 1
+	picker.layout_config.scroll_speed = 1
+
+	status_updater {completed = true}
+end
+
+function my_get_status_text(self, opts)
+	local ww = #(self:get_multi_selection())
+	local xx = (self.stats.processed or 0) - (self.stats.filtered or 0)
+	local yy = self.stats.processed or 0
+	local status_icon = ""
+	if opts and not opts.completed then
+		status_icon = "*"
+	end
+	if xx == 0 and yy == 0 then
+		return status_icon
+	end
+	local row = xx - (self.max_results - self:get_selection_row()) + 1
+	if ww == 0 then
+		return string.format("%s %s / %s / %s", status_icon, row, xx, yy)
+	else
+		return string.format("%s %s / %s / %s / %s", status_icon, ww, row, xx, yy)
+	end
+end
+
+function my_move_selection(prompt_bufnr, direction)
+	local actions = require "telescope.actions"
+	local state = require "telescope.state"
+	local picker = state.get_status(prompt_bufnr).picker
+	local status_updater = picker:get_status_updater(picker.prompt_win, picker.prompt_bufnr)
+
+	if direction == 1 then
+		actions.move_selection_next(prompt_bufnr)
+	elseif direction == -1 then
+		actions.move_selection_previous(prompt_bufnr)
+	end
+	status_updater {completed = true}
 end
 
 telescope.setup({
@@ -24,6 +62,7 @@ telescope.setup({
     }
   },
   defaults = {
+    get_status_text = my_get_status_text,
     layout_strategy = 'vertical',
     layout_config = {
       height = 0.95,
@@ -36,6 +75,8 @@ telescope.setup({
     file_ignore_patterns = { ".cache/", "%.o", "%.so", "%.a", "%.ko", "%.tar.gz" },
     mappings = {
       i = {
+	["<Up>"] = function (prompt_bufnr) my_move_selection(prompt_bufnr, -1) end,
+	["<Down>"] = function (prompt_bufnr) my_move_selection(prompt_bufnr, 1) end,
         ["<PageUp>"] = function (prompt_bufnr) my_scroll_results_page(prompt_bufnr, -1) end,
         ["<PageDown>"] = function (prompt_bufnr) my_scroll_results_page(prompt_bufnr, 1) end,
         ["<C-Up>"] = require "telescope.actions".preview_scrolling_up,
@@ -44,6 +85,8 @@ telescope.setup({
         ["<C-PageDown>"] = function (prompt_bufnr) my_scroll_preview_page(prompt_bufnr, 1) end,
       },
       n = {
+	["<Up>"] = function (prompt_bufnr) my_move_selection(prompt_bufnr, -1) end,
+	["<Down>"] = function (prompt_bufnr) my_move_selection(prompt_bufnr, 1) end,
         ["<PageUp>"] = function (prompt_bufnr) my_scroll_results_page(prompt_bufnr, -1) end,
         ["<PageDown>"] = function (prompt_bufnr) my_scroll_results_page(prompt_bufnr, 1) end,
         ["<C-Up>"] = require "telescope.actions".preview_scrolling_up,
