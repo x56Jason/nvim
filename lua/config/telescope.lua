@@ -72,10 +72,13 @@ function my_lsp_dynamic_workspace_symbols()
 	require('telescope.builtin').lsp_dynamic_workspace_symbols({fname_width=width})
 end
 
-function my_lsp_references()
+function my_lsp_references(user_opts)
+	local opts = user_opts or {}
 	local width = vim.api.nvim_win_get_width(0) * 3 / 10
 
-	require('telescope.builtin').lsp_references({ fname_width = width, jump_type = "never" })
+	opts.jump_type = "never"
+	opts.fname_width = width
+	require('telescope.builtin').lsp_references(opts)
 end
 
 local map = vim.api.nvim_set_keymap
