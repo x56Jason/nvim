@@ -1,7 +1,5 @@
 local telescope = require("telescope")
 
-telescope.load_extension "file_browser"
-
 function my_scroll_preview_page(prompt_bufnr, direction)
 	local status = require "telescope.state".get_status(prompt_bufnr)
 	status.picker.layout_config.scroll_speed = vim.api.nvim_win_get_height(status.preview_win)
@@ -97,6 +95,8 @@ telescope.setup({
     }
   },
 })
+
+telescope.load_extension "file_browser"
 
 function my_set_tagstack()
 	local tag_item = {
