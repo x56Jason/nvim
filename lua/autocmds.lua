@@ -10,6 +10,16 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
+-- always open help window on right vertical split
+vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+  group = augroup("vsplit_help"),
+  callback = function()
+    if vim.o.filetype == 'help' then
+      vim.cmd("wincmd L")
+    end
+  end,
+})
+
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = augroup("last_loc"),
