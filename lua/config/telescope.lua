@@ -121,6 +121,7 @@ function my_lsp_references(user_opts)
 
 	opts.jump_type = "never"
 	opts.fname_width = width
+	opts.include_current_line = true
 	require('telescope.builtin').lsp_references(opts)
 end
 
