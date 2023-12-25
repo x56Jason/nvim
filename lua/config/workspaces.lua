@@ -109,4 +109,4 @@ end
 local map = vim.api.nvim_set_keymap
 default_options = {noremap = true, silent = true}
 
-map("n", "<leader>w", "<cmd>lua my_checkout_commit_workspace()<CR>", default_options)
+map("n", "<C-\\>w", "<cmd>lua my_checkout_commit_workspace()<CR>", default_options)
