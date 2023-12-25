@@ -104,6 +104,12 @@ return {
 	},
 
 	{
+		"echasnovski/mini.indentscope",
+		version = false,
+		config = function() require("config.mini-indentscope") end,
+	},
+
+	{
 		"mycolorscheme",
 		dir = "~/.config/nvim/lua/mycolorscheme",
 		config = function() require("config.colorscheme") end,
