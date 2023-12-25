@@ -1,4 +1,7 @@
-vim.cmd("set mouse=")
-vim.cmd("set nowrap")
-vim.cmd("set number")
-vim.cmd("set signcolumn=yes:1")
+local opt = vim.opt
+
+opt.clipboard = "unnamedplus"
+opt.mouse = "a"
+opt.wrap = false
+opt.number = true
+opt.signcolumn = "yes:1"
