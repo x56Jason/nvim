@@ -54,6 +54,13 @@ end
 
 telescope.setup({
   extensions = {
+    fzf = {
+      fuzzy = true,                    -- false will only do exact matching
+      override_generic_sorter = true,  -- override the generic sorter
+      override_file_sorter = true,     -- override the file sorter
+      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+                                       -- the default case_mode is "smart_case"
+    },
     workspaces = {
       -- keep insert mode after selection in the picker, default is false
       keep_insert = true,
@@ -97,6 +104,7 @@ telescope.setup({
 })
 
 telescope.load_extension "file_browser"
+telescope.load_extension "fzf"
 
 function my_set_tagstack()
 	local tag_item = {

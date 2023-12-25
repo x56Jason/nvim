@@ -29,6 +29,7 @@ return {
 	},
 
 	{ "nvim-telescope/telescope-file-browser.nvim", },
+	{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make', },
 
 	{
 		"kyazdani42/nvim-tree.lua",
