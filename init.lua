@@ -24,3 +24,6 @@ require("options")
 
 -- Vim autocommands/autogroups
 require("autocmds")
+
+-- Set favorite colorscheme
+require("colorscheme")
