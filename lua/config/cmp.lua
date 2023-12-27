@@ -3,7 +3,7 @@ vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 local cmp = require('cmp')
 local luasnip = require('luasnip')
 
-require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/snippet"})
+require("luasnip.loaders.from_lua").load({paths = "~/nvim-snippet"})
 
 -- lspkind
 local lspkind = require "lspkind"
