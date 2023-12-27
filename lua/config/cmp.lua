@@ -11,6 +11,12 @@ lspkind.init()
 
 local select_opts = {behavior = cmp.SelectBehavior.Insert}
 
+local function has_words_before()
+	unpack = unpack or table.unpack
+	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
 cmp.setup {
 	snippet = {
 		expand = function(args)
@@ -72,22 +78,26 @@ cmp.setup {
 		end, {'i', 's'}),
 
 		['<Tab>'] = cmp.mapping(function(fallback)
-			local col = vim.fn.col('.') - 1
-
+			-- if cmp popup is visible then select next entry
 			if cmp.visible() then
 				cmp.select_next_item(select_opts)
-			elseif col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-				fallback()
-			elseif luasnip.expandable() then
-				luasnip.expand()
-			else
+			-- if the popup is not visible then open the popup
+			elseif has_words_before() then
 				cmp.complete()
+			-- if it's a snippet then jump between fields
+			elseif luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
+			-- otherwise fallback
+			else
+				fallback()
 			end
 		end, {'i', 's'}),
 
 		['<S-Tab>'] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item(select_opts)
+			elseif luasnip.jumpable(-1) then
+				luasnip.jump(-1)
 			else
 				fallback()
 			end
