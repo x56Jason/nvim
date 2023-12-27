@@ -83,3 +83,6 @@ function git_lines_history()
 end
 
 map("v", "x", ":lua git_lines_history()<CR>", default_options)
+
+-- don't paste in select mode when press 'p'
+map("s", "p", "p", default_options)
