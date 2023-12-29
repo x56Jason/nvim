@@ -1,5 +1,7 @@
 local opt = vim.opt
 
+opt.background = "dark"
+
 opt.clipboard = "unnamedplus"
 opt.mouse = "a"
 opt.wrap = false

@@ -96,5 +96,4 @@ default_options = {noremap = true, silent = true}
 
 map("n", "fc", "<cmd>lua my_telescope_colorscheme()<CR>", default_options)
 
-vim.opt.background = "dark"
 vim.cmd("colorscheme kanagawa")
