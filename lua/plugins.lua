@@ -69,8 +69,14 @@ return {
 	},
 
 	{
-		"simrat39/symbols-outline.nvim",
-		config = function() require("config.symbols") end,
+		"hedyhli/outline.nvim",
+		cmd = { "Outline", "OutlineOpen" },
+		keys = {
+			{ "ts", "<cmd>Outline<CR>", desc = "Toggle Symbol Outline" },
+		},
+		opts = {
+			symbols = { icon_source = lspkind, },
+		}
 	},
 
 	{
