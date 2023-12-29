@@ -112,9 +112,12 @@ return {
 		opts = { user_default_options = {mode = "foreground",}, },
 	},
 
+	{ "nmac427/guess-indent.nvim", },
+
 	{
 		"echasnovski/mini.indentscope",
 		version = false,
 		config = function() require("config.mini-indentscope") end,
 	},
+
 }
