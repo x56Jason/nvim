@@ -103,7 +103,6 @@ telescope.setup({
   },
 })
 
-telescope.load_extension "file_browser"
 telescope.load_extension "fzf"
 
 function my_set_tagstack()

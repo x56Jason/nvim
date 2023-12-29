@@ -110,7 +110,6 @@ wk.register({
 	},
 	f = {
 		name = "Files",
-		b = { "<cmd>Telescope file_browser<cr>", "File browser" },
 		f = {
 			"<cmd>lua require'telescope.builtin'.find_files({ find_command = {'fd', '--hidden', '--type', 'file', '--follow'}})<cr>",
 			"Find File",

@@ -31,7 +31,6 @@ return {
 		config = function() require("config.telescope") end,
 	},
 
-	{ "nvim-telescope/telescope-file-browser.nvim", },
 	{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make', },
 
 	{
