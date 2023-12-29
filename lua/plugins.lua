@@ -106,7 +106,7 @@ return {
 
 	{
 		"NvChad/nvim-colorizer.lua",
-		config = function() require("config.colorizer") end,
+		opts = { user_default_options = {mode = "foreground",}, },
 	},
 
 	{
