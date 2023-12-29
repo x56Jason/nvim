@@ -1,15 +1,18 @@
 return {
 	{
 		"folke/tokyonight.nvim",
+		lazy = true,
 		config = function() require("config.tokyonight") end,
 	},
 	{
 		"rebelot/kanagawa.nvim",
+		lazy = true,
 		config = function() require("config.kanagawa") end,
 	},
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
+		lazy = true,
 		config = function() require("config.catppuccin") end,
 	},
 
