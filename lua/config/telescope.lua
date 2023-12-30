@@ -116,7 +116,7 @@ end
 
 function my_lsp_dynamic_workspace_symbols(user_opts)
 	local opts = user_opts or {}
-	local width = vim.api.nvim_win_get_width(0) * 3 / 10
+	local width = vim.api.nvim_win_get_width(0) / 4
 
 	my_set_tagstack()
 
@@ -126,7 +126,7 @@ end
 
 function my_lsp_references(user_opts)
 	local opts = user_opts or {}
-	local width = vim.api.nvim_win_get_width(0) * 3 / 10
+	local width = vim.api.nvim_win_get_width(0) / 4
 
 	opts.jump_type = "never"
 	opts.fname_width = width
