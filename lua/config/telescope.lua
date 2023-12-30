@@ -68,13 +68,13 @@ telescope.setup({
   },
   defaults = {
     get_status_text = my_get_status_text,
-    layout_strategy = 'vertical',
+    layout_strategy = 'horizontal',
     layout_config = {
       height = 0.95,
       prompt_position = 'bottom',
       width = 0.95,
       preview_cutoff = 5,
-      preview_height = 0.6,
+      preview_width = 0.5,
       scroll_speed = 1,
     },
     file_ignore_patterns = { ".cache/", "%.o", "%.so", "%.a", "%.ko", "%.tar.gz" },
