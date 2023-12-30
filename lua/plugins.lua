@@ -113,6 +113,9 @@ return {
 
 	{
 		"yorickpeterse/nvim-window",
+		keys = {
+			{ "<leader>w", "<cmd>lua require('nvim-window').pick()<CR>", desc = "nvim-window Selection" },
+		},
 		config = function() require("config.nvim-window") end,
  	},
 
