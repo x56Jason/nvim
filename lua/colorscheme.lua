@@ -22,7 +22,7 @@ local function do_telescope_colorscheme(opts)
 
 	-- don't need previewer
 	if vim.fn.buflisted(bufnr) ~= 1 then
-		vim.notify("Can't do-telescope-colorscheme, already in preview now?",
+		vim.notify("Current buffer is not listed, can't do telescope-colorscheme!",
 			vim.log.levels.INFO, {"do-telescope-colorscheme"})
 		return
 	end
