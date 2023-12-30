@@ -83,7 +83,13 @@ return {
 
 	{
 		"akinsho/nvim-toggleterm.lua",
-		config = function() require("config.toggleterm") end,
+		cmd = { "ToggleTerm" },
+		keys = {
+			{ "<C-n>", "<cmd>ToggleTerm<CR>", desc = "Toggle Term" },
+		},
+		opts = {
+			direction = "float",
+		},
 	},
 
 	{ "ironhouzi/starlite-nvim" },
