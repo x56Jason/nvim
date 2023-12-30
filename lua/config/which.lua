@@ -185,7 +185,7 @@ wk.register({
 		c = { "<cmd>Telescope commands<cr>", "Commands" },
 		p = { "<cmd>Telescope projects<cr>", "Projects" },
 		P = {
-			"<cmd>lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>",
+			"<cmd>Telescope colorscheme enable_preview=true<cr>",
 			"Colorscheme with Preview",
 		},
 	},
