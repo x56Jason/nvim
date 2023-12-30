@@ -68,6 +68,8 @@ return {
 
 	{
 		"hrsh7th/nvim-cmp",
+		version = false,
+		event = "InsertEnter",
 		dependencies = {
 			{ "onsails/lspkind-nvim" },
 			{ "hrsh7th/cmp-nvim-lsp" },
