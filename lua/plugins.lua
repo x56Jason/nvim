@@ -18,6 +18,7 @@ return {
 
 	{
 		"neovim/nvim-lspconfig",
+		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 			"hrsh7th/nvim-cmp",
