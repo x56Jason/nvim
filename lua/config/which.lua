@@ -119,22 +119,9 @@ wk.register({
 		s = { "<cmd>w<cr>", "Save Buffer" },
 		t = { "<cmd>NvimTreeToggle<cr>", "Toogle Tree" },
 		T = { "<cmd>NvimTreeFindFile<CR>", "Find in Tree" },
-		z = { "<cmd>Telescope zoxide list<CR>", "Zoxide" },
 	},
 	g = {
 		name = "Git",
-		j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
-		k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
-		p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
-		r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
-		R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-		s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
-		t = "Open Gitui", -- comand in toggleterm.lua
-		n = { "<cmd>Neogit<cr>", "Open Neogit" },
-		u = {
-			"<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
-			"Undo Stage Hunk",
-		},
 		g = { "<cmd>Telescope git_status<cr>", "Open changed file" },
 		b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
 		B = { "<cmd>GitBlameToggle<cr>", "Toogle Blame" },
@@ -183,11 +170,6 @@ wk.register({
 		s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
 		t = { "<cmd>lua vim.lsp.buf.type_definition()<cr>", "Type Definition" },
 		w = { "<cmd>Telescope diagnostics<cr>", "Workspace Diagnostics" },
-	},
-	m = {
-		name = "Misc",
-		p = { "<cmd>PackerSync<cr>", "PackerSync" },
-		s = { "<cmd>SymbolsOutline<cr>", "Toggle SymbolsOutline" },
 	},
 	s = {
 		name = "Search",
