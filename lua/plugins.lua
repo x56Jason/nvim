@@ -27,12 +27,14 @@ return {
 
 	{
 		"nvim-telescope/telescope.nvim",
-		dependencies = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
 		event = "VeryLazy",
+		dependencies = {
+			{ "nvim-lua/popup.nvim" },
+			{ "nvim-lua/plenary.nvim" },
+			{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make', },
+		},
 		config = function() require("config.telescope") end,
 	},
-
-	{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make', },
 
 	{
 		"kyazdani42/nvim-tree.lua",
