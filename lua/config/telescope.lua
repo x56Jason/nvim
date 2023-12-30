@@ -114,12 +114,14 @@ function my_set_tagstack()
 	vim.fn.settagstack(tag_winid, { items = { tag_item } }, 't')
 end
 
-function my_lsp_dynamic_workspace_symbols()
+function my_lsp_dynamic_workspace_symbols(user_opts)
+	local opts = user_opts or {}
 	local width = vim.api.nvim_win_get_width(0) * 3 / 10
 
 	my_set_tagstack()
 
-	require('telescope.builtin').lsp_dynamic_workspace_symbols({fname_width=width})
+	opts.fname_width = width
+	require('telescope.builtin').lsp_dynamic_workspace_symbols(opts)
 end
 
 function my_lsp_references(user_opts)
