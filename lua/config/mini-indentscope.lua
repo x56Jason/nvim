@@ -16,6 +16,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		"notify",
 		"toggleterm",
 		"lazyterm",
+		"NvimTree",
 	},
 	callback = function()
 		vim.b.miniindentscope_disable = true
