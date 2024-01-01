@@ -68,7 +68,7 @@ telescope.setup({
   },
   defaults = {
     get_status_text = my_get_status_text,
-    layout_strategy = 'horizontal',
+    layout_strategy = vim.api.nvim_win_get_width(0) < 150 and "vertical" or 'horizontal',
     layout_config = {
       height = 0.95,
       prompt_position = 'bottom',
@@ -120,7 +120,7 @@ function my_lsp_dynamic_workspace_symbols(user_opts)
 
 	my_set_tagstack()
 
-	opts.fname_width = width
+	opts.fname_width = width < 50 and 50 or width
 	require('telescope.builtin').lsp_dynamic_workspace_symbols(opts)
 end
 
@@ -129,10 +129,22 @@ function my_lsp_references(user_opts)
 	local width = vim.api.nvim_win_get_width(0) / 4
 
 	opts.jump_type = "never"
-	opts.fname_width = width
+	opts.fname_width = width < 50 and 50 or width
 	opts.include_current_line = true
 	require('telescope.builtin').lsp_references(opts)
 end
+
+local function augroup(name)
+	return vim.api.nvim_create_augroup(name, { clear = true })
+end
+
+vim.api.nvim_create_autocmd({ "WinResized" }, {
+	group = augroup("telescope_resize_layout"),
+	callback = function()
+		config = require("telescope.config")
+		config.set_defaults({layout_strategy = vim.api.nvim_win_get_width(0) < 150 and "vertical" or "horizontal"})
+	end,
+})
 
 local map = vim.api.nvim_set_keymap
 default_options = {noremap = true, silent = true}
