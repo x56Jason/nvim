@@ -138,6 +138,15 @@ function my_lsp_references(user_opts)
 	require('telescope.builtin').lsp_references(opts)
 end
 
+function my_live_grep(user_opts)
+	local opts = user_opts or {}
+	opts.attach_mappings = function(_, map)
+		map("i", "<c-g>", require("telescope.actions").to_fuzzy_refine)
+		return true
+	end
+	require('telescope.builtin').live_grep(opts)
+end
+
 local function augroup(name)
 	return vim.api.nvim_create_augroup(name, { clear = true })
 end
@@ -159,5 +168,5 @@ map("n", "ff", "<cmd>Telescope find_files<CR>", default_options)
 map("n", "fw", "<cmd>Telescope workspaces<CR>", default_options)
 map("v", "fh", "<cmd>Telescope git_bcommits_range<CR>", default_options)
 map("n", "<C-\\>s", "<cmd>Telescope grep_string temp__scrolling_limit=1000<CR>", default_options)
-map("n", "<C-\\>t", "<cmd>Telescope live_grep temp__scrolling_limit=1000<CR>", default_options)
+map("n", "<C-\\>t", "<cmd>lua my_live_grep({temp__scrolling_limit=1000})<CR>", default_options)
 map("n", "<C-\\>r", "<cmd>lua my_lsp_references({temp__scrolling_limit = 1000})<CR>", default_options)
