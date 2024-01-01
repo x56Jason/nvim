@@ -121,6 +121,10 @@ function my_lsp_dynamic_workspace_symbols(user_opts)
 	my_set_tagstack()
 
 	opts.fname_width = width < 50 and 50 or width
+	opts.attach_mappings = function(_, map)
+		map("i", "<c-g>", require("telescope.actions").to_fuzzy_refine)
+		return true
+	end
 	require('telescope.builtin').lsp_dynamic_workspace_symbols(opts)
 end
 
