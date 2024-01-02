@@ -71,11 +71,13 @@ telescope.setup({
     get_status_text = my_get_status_text,
     layout_strategy = vim.api.nvim_win_get_width(0) < 150 and "vertical" or 'horizontal',
     layout_config = {
+      horizontal = {
+        preview_width = 0.5,
+      },
       height = 0.95,
       prompt_position = 'bottom',
       width = 0.95,
       preview_cutoff = 5,
-      preview_width = 0.5,
       scroll_speed = 1,
     },
     file_ignore_patterns = { ".cache/", "%.o", "%.so", "%.a", "%.ko", "%.tar.gz" },
