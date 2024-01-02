@@ -1,4 +1,5 @@
 local telescope = require("telescope")
+local actions = require("telescope.actions")
 
 function my_scroll_preview_page(prompt_bufnr, direction)
 	local status = require "telescope.state".get_status(prompt_bufnr)
@@ -88,6 +89,13 @@ telescope.setup({
         ["<C-Down>"] = require "telescope.actions".preview_scrolling_down,
         ["<C-PageUp>"] = function (prompt_bufnr) my_scroll_preview_page(prompt_bufnr, -1) end,
         ["<C-PageDown>"] = function (prompt_bufnr) my_scroll_preview_page(prompt_bufnr, 1) end,
+        ["<c-e>"] = function(prompt_bufnr)
+                actions.select_default(prompt_bufnr)
+                require("telescope.builtin").resume()
+        end,
+        ['<tab>'] = actions.toggle_selection + actions.move_selection_next,
+        ["<c-s>"] = actions.send_selected_to_qflist + actions.open_qflist,
+        ["<c-a>"] = actions.add_selected_to_qflist + actions.open_qflist,
       },
       n = {
 	["<Up>"] = function (prompt_bufnr) my_move_selection(prompt_bufnr, -1) end,
@@ -98,6 +106,13 @@ telescope.setup({
         ["<C-Down>"] = require "telescope.actions".preview_scrolling_down,
         ["<C-PageUp>"] = function (prompt_bufnr) my_scroll_preview_page(prompt_bufnr, -1) end,
         ["<C-PageDown>"] = function (prompt_bufnr) my_scroll_preview_page(prompt_bufnr, 1) end,
+        ["<c-e>"] = function(prompt_bufnr)
+                actions.select_default(prompt_bufnr)
+                require("telescope.builtin").resume()
+        end,
+        ['<tab>'] = actions.toggle_selection + actions.move_selection_next,
+        ["<c-s>"] = actions.send_selected_to_qflist + actions.open_qflist,
+        ["<c-a>"] = actions.add_selected_to_qflist + actions.open_qflist,
       },
     }
   },
