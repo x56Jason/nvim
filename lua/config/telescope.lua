@@ -168,7 +168,7 @@ end
 vim.api.nvim_create_autocmd({ "WinResized" }, {
 	group = augroup("telescope_resize_layout"),
 	callback = function()
-		config = require("telescope.config")
+		local config = require("telescope.config")
 		config.set_defaults({layout_strategy = vim.api.nvim_win_get_width(0) < 150 and "vertical" or "horizontal"})
 	end,
 })
