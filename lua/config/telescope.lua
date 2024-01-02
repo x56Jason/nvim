@@ -121,24 +121,22 @@ telescope.setup({
 
 telescope.load_extension "fzf"
 
-function my_set_tagstack()
-	local tag_item = {
-		tagname = vim.fn.expand('<cword>'),
-		from = { vim.fn.bufnr('%'), vim.fn.line('.'), vim.fn.col('.'), 0 }
-	}
-	local tag_winid = vim.fn.win_getid()
-	vim.fn.settagstack(tag_winid, { items = { tag_item } }, 't')
-end
-
 function my_lsp_dynamic_workspace_symbols(user_opts)
 	local opts = user_opts or {}
 	local width = vim.api.nvim_win_get_width(0) / 4
-
-	my_set_tagstack()
+	local tag_item = {
+		tagname = vim.fn.expand('<cword>'),
+		from = { vim.fn.bufnr('%'), vim.fn.line('.'), vim.fn.col('.'), 0 },
+		winid = vim.fn.win_getid(),
+	}
 
 	opts.fname_width = width < 50 and 50 or width
 	opts.attach_mappings = function(_, map)
 		map("i", "<c-g>", actions.to_fuzzy_refine)
+		map({"i", "n"}, "<CR>", function(prompt_bufnr)
+			vim.fn.settagstack(tag_item.winid, { items = { tag_item } }, 't')
+			actions.select_default(prompt_bufnr)
+		end)
 		return true
 	end
 	require('telescope.builtin').lsp_dynamic_workspace_symbols(opts)
