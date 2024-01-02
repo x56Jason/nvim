@@ -40,7 +40,6 @@ function my_get_status_text(self, opts)
 end
 
 function my_move_selection(prompt_bufnr, direction)
-	local actions = require "telescope.actions"
 	local state = require "telescope.state"
 	local picker = state.get_status(prompt_bufnr).picker
 	local status_updater = picker:get_status_updater(picker.prompt_win, picker.prompt_bufnr)
@@ -139,7 +138,7 @@ function my_lsp_dynamic_workspace_symbols(user_opts)
 
 	opts.fname_width = width < 50 and 50 or width
 	opts.attach_mappings = function(_, map)
-		map("i", "<c-g>", require("telescope.actions").to_fuzzy_refine)
+		map("i", "<c-g>", actions.to_fuzzy_refine)
 		return true
 	end
 	require('telescope.builtin').lsp_dynamic_workspace_symbols(opts)
@@ -158,7 +157,7 @@ end
 function my_live_grep(user_opts)
 	local opts = user_opts or {}
 	opts.attach_mappings = function(_, map)
-		map("i", "<c-g>", require("telescope.actions").to_fuzzy_refine)
+		map("i", "<c-g>", actions.to_fuzzy_refine)
 		return true
 	end
 	require('telescope.builtin').live_grep(opts)
