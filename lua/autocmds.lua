@@ -65,3 +65,13 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd({"ColorScheme","BufReadPost"}, {
+	pattern = { "*patch.diff" },
+	callback = function()
+		vim.api.nvim_set_hl(0, "PRDiffAdd", { fg = "#232634", bg = "#a6da95"})
+		vim.api.nvim_set_hl(0, "PRDiffDel", { fg = "#d7e3d8", bg = "#e82424"})
+		vim.cmd.syntax([[match PRDiffAdd /\v^[\+]((\-\-)|(\@\@ )|(\+\+)|(index )|(diff ))@!.*/]])
+		vim.cmd.syntax([[match PRDiffDel /\v^[\-]((\-\-)|(\@\@ )|(\+\+)|(index )|(diff ))@!.*/]])
+	end,
+})
