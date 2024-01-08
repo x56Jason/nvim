@@ -142,4 +142,10 @@ return {
 		config = function() require("config.mini-indentscope") end,
 	},
 
+	{
+		"glance",
+		dir = "~/glance",
+		config = true,
+	},
 }
+
