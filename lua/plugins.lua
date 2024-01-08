@@ -16,6 +16,8 @@ return {
 		config = function() require("config.catppuccin") end,
 	},
 
+	{ "rcarriga/nvim-notify", },
+
 	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
