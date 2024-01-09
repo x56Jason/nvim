@@ -134,7 +134,7 @@ return {
 
 	{
 		"NvChad/nvim-colorizer.lua",
-		opts = { user_default_options = {mode = "foreground",}, },
+		opts = { user_default_options = {mode = "background",}, },
 	},
 
 	{ "nmac427/guess-indent.nvim", },
