@@ -122,7 +122,10 @@ return {
  	},
 
 	{ "tpope/vim-unimpaired" },
-	{ "tpope/vim-fugitive" },
+	{
+		"tpope/vim-fugitive",
+		config = function() require("config.fugitive") end,
+	},
 
 	{
 		"natecraddock/workspaces.nvim",
