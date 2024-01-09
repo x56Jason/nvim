@@ -86,3 +86,10 @@ map("v", "x", ":lua git_lines_history()<CR>", default_options)
 
 -- don't paste in select mode when press 'p'
 map("s", "p", "p", default_options)
+
+function open_help()
+	local cword = vim.fn.expand('<cword>')
+	vim.cmd("h " .. cword)
+end
+
+map("n", "<C-h>", "<cmd>lua open_help()<CR>", default_options)
