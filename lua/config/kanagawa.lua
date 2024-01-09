@@ -1,6 +1,7 @@
 require('kanagawa').setup({
     colors = {
         palette = {
+            fujiWhite = "#a6a69c",
             sumiInk3 = "#000000", -- wave theme background
             waveRed = "#e2a478", -- wave theme 'PreProc' highlight group
             dragonBlack3 = "#000000", -- dragon theme background
