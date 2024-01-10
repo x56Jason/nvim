@@ -176,7 +176,7 @@ vim.api.nvim_create_autocmd({ "WinResized" }, {
 })
 
 local map = vim.api.nvim_set_keymap
-default_options = {noremap = true, silent = true}
+local default_options = {noremap = true, silent = true}
 
 map("n", "fg", "<cmd>lua my_lsp_dynamic_workspace_symbols()<CR>", default_options)
 map("n", "fb", "<cmd>Telescope buffers<CR>", default_options)
