@@ -155,7 +155,10 @@ end
 
 function my_live_grep(user_opts)
 	local opts = user_opts or {}
-	opts.cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+	vim.fn.systemlist("git rev-parse --is-inside-work-tree")
+	if vim.v.shell_error == 0 then
+		opts.cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+	end
 	opts.attach_mappings = function(_, map)
 		map("i", "<c-g>", actions.to_fuzzy_refine)
 		return true
