@@ -82,6 +82,7 @@ telescope.setup({
     file_ignore_patterns = { ".cache/", "%.o", "%.so", "%.a", "%.ko", "%.tar.gz" },
     mappings = {
       i = {
+        ["<esc>"] = require('telescope.actions').close,
 	["<Up>"] = function (prompt_bufnr) my_move_selection(prompt_bufnr, -1) end,
 	["<Down>"] = function (prompt_bufnr) my_move_selection(prompt_bufnr, 1) end,
         ["<PageUp>"] = function (prompt_bufnr) my_scroll_results_page(prompt_bufnr, -1) end,
