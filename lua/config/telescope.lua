@@ -155,6 +155,7 @@ end
 
 function my_live_grep(user_opts)
 	local opts = user_opts or {}
+	opts.cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
 	opts.attach_mappings = function(_, map)
 		map("i", "<c-g>", actions.to_fuzzy_refine)
 		return true
