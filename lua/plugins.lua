@@ -151,8 +151,7 @@ return {
 	},
 
 	{
-		"glance",
-		dir = "~/glance",
+		"x48Jason/glance",
 		config = true,
 	},
 
