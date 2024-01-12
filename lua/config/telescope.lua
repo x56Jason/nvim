@@ -137,6 +137,7 @@ function my_lsp_dynamic_workspace_symbols(user_opts)
 		map({"i", "n"}, "<CR>", function(prompt_bufnr)
 			vim.fn.settagstack(tag_item.winid, { items = { tag_item } }, 't')
 			actions.select_default(prompt_bufnr)
+			vim.cmd.normal("zz")
 		end)
 		return true
 	end
