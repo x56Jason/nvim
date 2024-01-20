@@ -152,7 +152,14 @@ return {
 
 	{
 		"x48Jason/glance",
-		config = true,
+		opts = {
+			gitee = {
+				token_file = "~/.token.gitee",
+				repo = "openeuler/kernel",
+			},
+			patchdiff = "diffonly",
+			q_quit_log = "off",
+		},
 	},
 
 	{
