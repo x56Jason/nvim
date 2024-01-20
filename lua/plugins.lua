@@ -155,5 +155,10 @@ return {
 		dir = "~/glance",
 		config = true,
 	},
+
+	{
+		"diepm/vim-rest-console",
+		config = function() require("config.vim-rest-console") end,
+	}
 }
 
