@@ -142,8 +142,6 @@ return {
 		},
 	},
 
-	{ "nmac427/guess-indent.nvim", },
-
 	{
 		"echasnovski/mini.indentscope",
 		version = false,
