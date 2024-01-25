@@ -163,6 +163,12 @@ return {
 	{
 		"diepm/vim-rest-console",
 		config = function() require("config.vim-rest-console") end,
-	}
+	},
+
+	{
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		config = function() require("config.harpoon") end,
+	},
 }
 
