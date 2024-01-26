@@ -68,7 +68,7 @@ telescope.setup({
   },
   defaults = {
     get_status_text = my_get_status_text,
-    layout_strategy = vim.api.nvim_win_get_width(0) < 150 and "vertical" or 'horizontal',
+    layout_strategy = 'vertical',
     layout_config = {
       horizontal = {
         preview_width = 0.5,
@@ -170,14 +170,6 @@ end
 local function augroup(name)
 	return vim.api.nvim_create_augroup(name, { clear = true })
 end
-
-vim.api.nvim_create_autocmd({ "WinResized" }, {
-	group = augroup("telescope_resize_layout"),
-	callback = function()
-		local config = require("telescope.config")
-		config.set_defaults({layout_strategy = vim.api.nvim_win_get_width(0) < 150 and "vertical" or "horizontal"})
-	end,
-})
 
 local map = vim.api.nvim_set_keymap
 local default_options = {noremap = true, silent = true}
