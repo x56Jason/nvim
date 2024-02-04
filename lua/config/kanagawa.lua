@@ -21,6 +21,9 @@ require('kanagawa').setup({
         end
         return {
             ["@lsp.type.comment"] = { fg = color.palette.fujiGray }, -- Comment
+            ["CurSearch"] = { fg = "#000000", bg = "#febc08"},
+            ["IncSearch"] = { fg = "#000000", bg = "#febc08"},
+            ["Search"] = { fg = "#000000", bg = "#febc08"},
         }
     end,
 })
