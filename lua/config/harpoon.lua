@@ -1,17 +1,23 @@
-local mark = require("harpoon.mark")
-function my_harpoon_add_file()
-	mark.add_file()
+local harpoon = require("harpoon")
+harpoon:setup()
+
+local function my_harpoon_add_file()
+	harpoon:list():append()
+
 	local f = vim.api.nvim_buf_get_name(0)
 	vim.notify("Harpoon: <" .. f .. "> added", vim.log.levels.INFO, {})
 end
 
-local map = vim.api.nvim_set_keymap
-local default_options = {noremap = true, silent = true}
+local toggle_opts = {
+	border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+	ui_width_ratio = 0.375,
+	title_pos = "center",
+}
 
-map("n", "m", "<cmd>lua my_harpoon_add_file()<CR>", default_options)
-map("n", "MM", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", default_options)
-map("n", "M1", "<cmd>lua require('harpoon.ui').nav_file(1)<CR>", default_options)
-map("n", "M2", "<cmd>lua require('harpoon.ui').nav_file(2)<CR>", default_options)
-map("n", "M3", "<cmd>lua require('harpoon.ui').nav_file(3)<CR>", default_options)
-map("n", "M4", "<cmd>lua require('harpoon.ui').nav_file(4)<CR>", default_options)
-map("n", "M5", "<cmd>lua require('harpoon.ui').nav_file(5)<CR>", default_options)
+vim.keymap.set("n", "m", function() my_harpoon_add_file() end)
+vim.keymap.set("n", "MM", function() harpoon.ui:toggle_quick_menu(harpoon:list(), toggle_opts) end)
+vim.keymap.set("n", "M1", function() harpoon:list():select(1) end)
+vim.keymap.set("n", "M2", function() harpoon:list():select(2) end)
+vim.keymap.set("n", "M3", function() harpoon:list():select(3) end)
+vim.keymap.set("n", "M4", function() harpoon:list():select(4) end)
+vim.keymap.set("n", "M5", function() harpoon:list():select(5) end)
