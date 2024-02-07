@@ -21,3 +21,7 @@ vim.keymap.set("n", "M2", function() harpoon:list():select(2) end)
 vim.keymap.set("n", "M3", function() harpoon:list():select(3) end)
 vim.keymap.set("n", "M4", function() harpoon:list():select(4) end)
 vim.keymap.set("n", "M5", function() harpoon:list():select(5) end)
+
+-- Tab switch buffer
+vim.keymap.set("n", "<TAB>", function() harpoon:list():next() end)
+vim.keymap.set("n", "<S-TAB>", function() harpoon:list():prev() end)
