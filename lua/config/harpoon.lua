@@ -1,5 +1,10 @@
 local harpoon = require("harpoon")
-harpoon:setup()
+
+harpoon:setup({
+	settings = {
+		save_on_toggle = true,
+	},
+})
 
 local function my_harpoon_add_file()
 	harpoon:list():append()
