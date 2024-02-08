@@ -18,6 +18,9 @@ return {
 
 	{ "rcarriga/nvim-notify", },
 
+	{ "williamboman/mason.nvim", },
+	{ "williamboman/mason-lspconfig.nvim", },
+
 	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPost", "BufNewFile", "BufWritePre" },
