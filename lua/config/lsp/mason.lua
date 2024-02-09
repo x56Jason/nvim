@@ -3,7 +3,7 @@ local lspconfig = require('lspconfig')
 local nproc = string.gsub(vim.fn.system('nproc'), "\n", "")
 
 local ensure_servers = {
-	"clangd",
+	"clangd@16.0.2",
 	"lua_ls",
 }
 
@@ -13,6 +13,8 @@ local server_opts = {
 			"clangd",
 			"--header-insertion=never",
 			"-j", nproc,
+			"--completion-style=detailed",
+			"--function-arg-placeholders",
 			"--limit-references=0",
 			"--limit-results=0",
 			"--rename-file-limit=0",
