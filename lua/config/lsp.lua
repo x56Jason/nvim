@@ -1,4 +1,4 @@
-local lspconfig = require('lspconfig')
+-- mason/mason-lspconfig/nvim-lspconfig
 
 local nproc = string.gsub(vim.fn.system('nproc'), "\n", "")
 
@@ -46,18 +46,6 @@ local server_opts = {
 		},
 	},
 
-	["bashls"] = {
-		cmd = {
-			"bash-language-server", "start"
-		},
-		cmd_env = {
-			GLOB_PATTERN = "*@(.sh|.inc|.bash|.command)"
-		},
-		filetypes = { "sh" },
-		root_dir = lspconfig.util.find_git_ancestor,
-		single_file_support = true,
-	},
-
 	["pylsp"] = {
 		cmd = { "pylsp" },
 		filetypes = { "python" }
@@ -77,7 +65,7 @@ local server_handlers = {
 		local opts = vim.tbl_deep_extend("force", {
 			capabilities = vim.deepcopy(common_capabilities),
 		}, server_opts[server_name] or {})
-		lspconfig[server_name].setup(opts)
+		require('lspconfig')[server_name].setup(opts)
 	end,
 }
 
