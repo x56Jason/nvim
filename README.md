@@ -2,12 +2,12 @@
 
 This is a lua based, bootstrap-able NeoVim Configuration for C development (for example, Linux Kernel or Qemu).
 
-## Prerequisite
+## 1. Prerequisite
 
 1. Install NeoVim. Refer to [NeoVim Installation Wiki](https://github.com/neovim/neovim/wiki/Installing-Neovim)
 2. Have access to github.com. Proxy may need to be configured if sitting in internal network.
 
-## Install
+## 2. Install
 
 1. Do following to cleanup previous nvim related configurations
 ```bash
@@ -19,25 +19,34 @@ rm -rf ~/.cache/nvim
 3. Launch 'nvim'. This will download all the necessary plugins automatically.
 4. Quit nvim, and relaunch nvim. That's it.
 
-## Post-Install
+### 2.1 Language Servers
 
-1. Install language servers (clangd, bashls, etc.). Refer to [server_configurations.md](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md) on how to install language servers.
-2. Install Nerd fonts
+Language servers are leveraged to do auto-completion, go-to-definition, references, etc.
 
-## Generate compile_commands.json
+Refer to [server_configurations.md](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md) on various language servers.
 
-If it is C repo, the file compile_commands.json is needed for language server clangd to work.
+This configuration uses plugin [mason](https://github.com/williamboman/mason.nvim) to manage language servers.
 
-### Linux Kernel
+Two language servers 'clangd' and 'lua_ls' are set automatic installation. Use ':Mason' to bring up mason and install other language servers.
+
+## 3. Post-Install
+
+Nerd fonts are pretty icon fonts. It is better to install to have a good experience.
+
+## 4. Generate compile_commands.json
+
+If it is C repo, the file compile_commands.json is needed for language server 'clangd' to work.
+
+### 4.1 Linux Kernel
 
 Run scripts/clang-tools/gen_compile_commands.py after kernel compiling. This will generate compile_commands.json in the top directory.
 Using nvim to edit a file in the repo will make clangd start to act as a language server.
 
-### Qemu
+### 4.2 Qemu
 
 Qemu automatically generate a compile_commands.json in its build/ directory, so no extra actions is needed for Qemu.
 
-## Key Bindings
+## 5. Key Bindings
 
 | Mode | Key              | Binding                                                     |
 | ---- | ---------------- | ------------------------------------------------------------|
