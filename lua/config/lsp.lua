@@ -2,8 +2,8 @@ local lspconfig = require('lspconfig')
 
 local nproc = string.gsub(vim.fn.system('nproc'), "\n", "")
 
-local ensure_servers = {
-	"clangd@16.0.2",
+local ensure_installed_servers = {
+	"clangd@16.0.2", -- v17.0.3 indexing is too slow
 	"lua_ls",
 }
 
@@ -15,8 +15,6 @@ local server_opts = {
 			"-j", nproc,
 			"--completion-style=detailed",
 			"--function-arg-placeholders",
-			"--limit-references=0",
-			"--limit-results=0",
 			"--rename-file-limit=0",
 			"--background-index",
 			"--background-index-priority=normal",
@@ -98,8 +96,45 @@ local mason_opts = {
 
 require('mason').setup(mason_opts)
 require('mason-lspconfig').setup({
-	ensure_installed = ensure_servers,
+	ensure_installed = ensure_installed_servers,
 	automatic_installation = true,
 	handlers = server_handlers,
 })
 
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  desc = 'LSP actions',
+  callback = function()
+    local bufmap = function(mode, lhs, rhs)
+      local opts = {buffer = true}
+      vim.keymap.set(mode, lhs, rhs, opts)
+    end
+
+    bufmap('n', '<C-]>', '<cmd>lua vim.lsp.buf.definition()<CR>zz')
+    bufmap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
+    bufmap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
+  end
+})
+
+-- Diagnostics
+vim.diagnostic.config({
+  float = { source = "always", border = "rounded" },
+  virtual_text = false,
+  signs = true,
+})
+
+vim.keymap.set('n', '<C-E>', function()
+	-- If we find a floating window, close it.
+	for _, win in ipairs(vim.api.nvim_list_wins()) do
+		if vim.api.nvim_win_get_config(win).relative ~= '' then
+			vim.api.nvim_win_close(win, true)
+			return
+		end
+	end
+
+	vim.diagnostic.open_float(nil, { focus = false })
+end, { desc = 'Toggle Diagnostics' })
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+	vim.lsp.handlers.hover, { border = "rounded" }
+)
