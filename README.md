@@ -5,7 +5,7 @@ This is a lua based, bootstrap-able NeoVim Configuration for C development (for 
 ## 1. Prerequisite
 
 1. Install [NeoVim](https://neovim.io/). Refer to [NeoVim Installation Wiki](https://github.com/neovim/neovim/blob/master/INSTALL.md)
-2. Install [ripgrep](https://github.com/BurntSushi/ripgrep), usually distributions already have it.
+2. Install [ripgrep](https://github.com/BurntSushi/ripgrep). Usually distributions already have it.
 3. [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) are pretty icon fonts. It is better to install to have a good experience.
 4. Have access to github.com. Proxy may need to be configured if sitting in internal network.
 
@@ -27,9 +27,11 @@ This configuration leverages [LSP](https://microsoft.github.io/language-server-p
 
 Refer to [server_configurations.md](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md) on various language servers.
 
-This configuration uses plugin [mason](https://github.com/williamboman/mason.nvim) to manage language servers.
+This configuration uses plugin [mason](https://github.com/williamboman/mason.nvim) to manage language servers. Use ':Mason' command to bring up mason interface.
 
-Two language servers 'clangd' and 'lua_ls' are set automatic installation. Use ':Mason' to bring up mason and install other language servers.
+Two language servers 'clangd' and 'lua_ls' are automatically installed. Use ':Mason' to bring up mason and install other language servers.
+
+Sometimes language servers may fail to install. Usually that is because of environment issues, such as proxy is not configured properly.
 
 ### 3.1. Clangd and compile_commands.json
 
