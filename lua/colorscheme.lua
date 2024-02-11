@@ -79,7 +79,7 @@ local function do_telescope_colorscheme(opts)
 	picker:find()
 end
 
-function my_telescope_colorscheme()
+local function my_telescope_colorscheme()
 	do_telescope_colorscheme({
 		"kanagawa-wave",
 		"catppuccin-mocha",
@@ -91,9 +91,8 @@ function my_telescope_colorscheme()
 	})
 end
 
-local map = vim.api.nvim_set_keymap
-default_options = {noremap = true, silent = true}
+local default_options = {noremap = true, silent = true}
 
-map("n", "fc", "<cmd>lua my_telescope_colorscheme()<CR>", default_options)
+vim.keymap.set("n", "fc", my_telescope_colorscheme, default_options)
 
 vim.cmd("colorscheme kanagawa")
