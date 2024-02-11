@@ -1,14 +1,14 @@
 local telescope = require("telescope")
 local actions = require("telescope.actions")
 
-function my_scroll_preview_page(prompt_bufnr, direction)
+local function my_scroll_preview_page(prompt_bufnr, direction)
 	local status = require "telescope.state".get_status(prompt_bufnr)
 	status.picker.layout_config.scroll_speed = vim.api.nvim_win_get_height(status.preview_win)
 	require "telescope.actions.set".scroll_previewer(prompt_bufnr, direction)
 	status.picker.layout_config.scroll_speed = 1
 end
 
-function my_scroll_results_page(prompt_bufnr, direction)
+local function my_scroll_results_page(prompt_bufnr, direction)
 	local state = require "telescope.state".get_status(prompt_bufnr)
 	local picker = state.picker
 	local status_updater = picker:get_status_updater(picker.prompt_win, picker.prompt_bufnr)
@@ -20,7 +20,7 @@ function my_scroll_results_page(prompt_bufnr, direction)
 	status_updater {completed = true}
 end
 
-function my_get_status_text(self, opts)
+local function my_get_status_text(self, opts)
 	local ww = #(self:get_multi_selection())
 	local xx = (self.stats.processed or 0) - (self.stats.filtered or 0)
 	local yy = self.stats.processed or 0
@@ -39,7 +39,7 @@ function my_get_status_text(self, opts)
 	end
 end
 
-function my_move_selection(prompt_bufnr, direction)
+local function my_move_selection(prompt_bufnr, direction)
 	local state = require "telescope.state"
 	local picker = state.get_status(prompt_bufnr).picker
 	local status_updater = picker:get_status_updater(picker.prompt_win, picker.prompt_bufnr)
@@ -122,7 +122,7 @@ telescope.setup({
 
 telescope.load_extension "fzf"
 
-function my_lsp_dynamic_workspace_symbols(user_opts)
+local function my_lsp_dynamic_workspace_symbols(user_opts)
 	local opts = user_opts or {}
 	local width = vim.api.nvim_win_get_width(0) / 4
 	local tag_item = {
@@ -144,8 +144,8 @@ function my_lsp_dynamic_workspace_symbols(user_opts)
 	require('telescope.builtin').lsp_dynamic_workspace_symbols(opts)
 end
 
-function my_lsp_references(user_opts)
-	local opts = user_opts or {}
+local function my_lsp_references()
+	local opts = {temp__scrolling_limit=1000}
 	local width = vim.api.nvim_win_get_width(0) / 4
 
 	opts.jump_type = "never"
@@ -154,8 +154,8 @@ function my_lsp_references(user_opts)
 	require('telescope.builtin').lsp_references(opts)
 end
 
-function my_live_grep(user_opts)
-	local opts = user_opts or {}
+local function my_live_grep()
+	local opts = {temp__scrolling_limit=1000}
 	vim.fn.systemlist("git rev-parse --is-inside-work-tree")
 	if vim.v.shell_error == 0 then
 		opts.cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
@@ -167,18 +167,13 @@ function my_live_grep(user_opts)
 	require('telescope.builtin').live_grep(opts)
 end
 
-local function augroup(name)
-	return vim.api.nvim_create_augroup(name, { clear = true })
-end
-
-local map = vim.api.nvim_set_keymap
 local default_options = {noremap = true, silent = true}
 
-map("n", "fg", "<cmd>lua my_lsp_dynamic_workspace_symbols()<CR>", default_options)
-map("n", "fb", "<cmd>Telescope buffers<CR>", default_options)
-map("n", "ff", "<cmd>Telescope find_files<CR>", default_options)
-map("n", "fw", "<cmd>Telescope workspaces<CR>", default_options)
-map("v", "fh", "<cmd>Telescope git_bcommits_range<CR>", default_options)
-map("n", "<C-\\>s", "<cmd>Telescope grep_string temp__scrolling_limit=1000<CR>", default_options)
-map("n", "<C-\\>t", "<cmd>lua my_live_grep({temp__scrolling_limit=1000})<CR>", default_options)
-map("n", "<C-\\>r", "<cmd>lua my_lsp_references({temp__scrolling_limit = 1000})<CR>", default_options)
+vim.keymap.set("n", "fg", my_lsp_dynamic_workspace_symbols, default_options)
+vim.keymap.set("n", "fb", "<cmd>Telescope buffers<CR>", default_options)
+vim.keymap.set("n", "ff", "<cmd>Telescope find_files<CR>", default_options)
+vim.keymap.set("n", "fw", "<cmd>Telescope workspaces<CR>", default_options)
+vim.keymap.set("v", "fh", "<cmd>Telescope git_bcommits_range<CR>", default_options)
+vim.keymap.set("n", "<C-\\>s", "<cmd>Telescope grep_string temp__scrolling_limit=1000<CR>", default_options)
+vim.keymap.set("n", "<C-\\>t", my_live_grep, default_options)
+vim.keymap.set("n", "<C-\\>r", my_lsp_references, default_options)
