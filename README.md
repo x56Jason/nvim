@@ -39,8 +39,9 @@ If it is C repo, the file compile_commands.json is needed for language server 'c
 
 #### 3.1.1. Linux Kernel
 
-Run scripts/clang-tools/gen_compile_commands.py after kernel compiling. This will generate compile_commands.json in the top directory.
-Using nvim to edit a file in the repo will make clangd start to act as a language server.
+Run 'scripts/clang-tools/gen_compile_commands.py' after kernel compiling. This will generate compile_commands.json in the top directory.
+
+After that, editing c file in the kernel repo will make clangd start to act as a language server.
 
 #### 3.1.2. Qemu
 
