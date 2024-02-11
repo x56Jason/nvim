@@ -48,7 +48,7 @@ local my_commit_work_directory = ''
 
 local utils = require("telescope.utils")
 
-function my_checkout_commit_workspace()
+local function my_checkout_commit_workspace()
 	local buf_path = vim.api.nvim_buf_get_name(0)
 	if buf_path:find("fugitive://", 1, true) ~= 1 then
 		return
@@ -106,7 +106,4 @@ function my_checkout_commit_workspace()
 	vim.api.nvim_win_set_cursor(0, {row, col})
 end
 
-local map = vim.api.nvim_set_keymap
-default_options = {noremap = true, silent = true}
-
-map("n", "<C-\\>w", "<cmd>lua my_checkout_commit_workspace()<CR>", default_options)
+vim.keymap.set("n", "<C-\\>w", my_checkout_commit_workspace, {desc="check out fugitive commit to a workspace", silent=true, noremap = true})
