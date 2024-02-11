@@ -15,7 +15,7 @@ require("nvim-window").setup({
 })
 
 local map = vim.api.nvim_set_keymap
-default_options = {noremap = true, silent = true}
+local default_options = {noremap = true, silent = true}
 
 map("n", "<leader>w", "<cmd>lua require('nvim-window').pick()<CR>", default_options)
 
