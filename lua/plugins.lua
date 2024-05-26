@@ -178,5 +178,6 @@ return {
 		"j-hui/fidget.nvim",
 		config = true,
 	},
+	{ "tpope/vim-sleuth" },
 }
 
