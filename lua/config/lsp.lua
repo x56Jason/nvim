@@ -108,6 +108,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.diagnostic.config({
   float = { source = "always", border = "rounded" },
   virtual_text = false,
+  underline = false,
   signs = true,
 })
 
