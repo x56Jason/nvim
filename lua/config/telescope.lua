@@ -147,21 +147,45 @@ end
 local function my_lsp_references()
 	local opts = {temp__scrolling_limit=1000}
 	local width = vim.api.nvim_win_get_width(0) / 4
+	local tag_item = {
+		tagname = vim.fn.expand('<cword>'),
+		from = { vim.fn.bufnr('%'), vim.fn.line('.'), vim.fn.col('.'), 0 },
+		winid = vim.fn.win_getid(),
+	}
 
 	opts.jump_type = "never"
 	opts.fname_width = width < 50 and 50 or width
 	opts.include_current_line = true
+	opts.attach_mappings = function(_, map)
+		map({"i", "n"}, "<CR>", function(prompt_bufnr)
+			vim.fn.settagstack(tag_item.winid, { items = { tag_item } }, 't')
+			actions.select_default(prompt_bufnr)
+			vim.cmd.normal("zz")
+		end)
+		return true
+	end
 	require('telescope.builtin').lsp_references(opts)
 end
 
 local function my_live_grep()
 	local opts = {temp__scrolling_limit=1000}
+	local tag_item = {
+		tagname = vim.fn.expand('<cword>'),
+		from = { vim.fn.bufnr('%'), vim.fn.line('.'), vim.fn.col('.'), 0 },
+		winid = vim.fn.win_getid(),
+	}
+
 	vim.fn.systemlist("git rev-parse --is-inside-work-tree")
 	if vim.v.shell_error == 0 then
 		opts.cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
 	end
 	opts.attach_mappings = function(_, map)
 		map("i", "<c-g>", actions.to_fuzzy_refine)
+		map({"i", "n"}, "<CR>", function(prompt_bufnr)
+			vim.fn.settagstack(tag_item.winid, { items = { tag_item } }, 't')
+			actions.select_default(prompt_bufnr)
+			vim.cmd.normal("zz")
+		end)
 		return true
 	end
 	require('telescope.builtin').live_grep(opts)
