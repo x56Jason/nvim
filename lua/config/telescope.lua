@@ -167,6 +167,30 @@ local function my_lsp_references()
 	require('telescope.builtin').lsp_references(opts)
 end
 
+local function my_grep_string()
+	local opts = {temp__scrolling_limit=1000}
+	local tag_item = {
+		tagname = vim.fn.expand('<cword>'),
+		from = { vim.fn.bufnr('%'), vim.fn.line('.'), vim.fn.col('.'), 0 },
+		winid = vim.fn.win_getid(),
+	}
+
+	vim.fn.systemlist("git rev-parse --is-inside-work-tree")
+	if vim.v.shell_error == 0 then
+		opts.cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+	end
+	opts.attach_mappings = function(_, map)
+		map("i", "<c-g>", actions.to_fuzzy_refine)
+		map({"i", "n"}, "<CR>", function(prompt_bufnr)
+			vim.fn.settagstack(tag_item.winid, { items = { tag_item } }, 't')
+			actions.select_default(prompt_bufnr)
+			vim.cmd.normal("zz")
+		end)
+		return true
+	end
+	require('telescope.builtin').grep_string(opts)
+end
+
 local function my_live_grep()
 	local opts = {temp__scrolling_limit=1000}
 	local tag_item = {
@@ -198,6 +222,6 @@ vim.keymap.set("n", "fb", "<cmd>Telescope buffers<CR>", default_options)
 vim.keymap.set("n", "ff", "<cmd>Telescope find_files<CR>", default_options)
 vim.keymap.set("n", "fw", "<cmd>Telescope workspaces<CR>", default_options)
 vim.keymap.set("v", "fh", "<cmd>Telescope git_bcommits_range<CR>", default_options)
-vim.keymap.set("n", "<C-\\>s", "<cmd>Telescope grep_string temp__scrolling_limit=1000<CR>", default_options)
+vim.keymap.set("n", "<C-\\>s", my_grep_string, default_options)
 vim.keymap.set("n", "<C-\\>t", my_live_grep, default_options)
 vim.keymap.set("n", "<C-\\>r", my_lsp_references, default_options)
