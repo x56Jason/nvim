@@ -81,3 +81,4 @@ function open_help()
 end
 
 map("n", "<C-h>", "<cmd>lua open_help()<CR>", default_options)
+vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })

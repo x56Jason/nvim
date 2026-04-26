@@ -9,6 +9,8 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   })
 end
+vim.opt.termguicolors = true
+vim.cmd.colorscheme("default")
 vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = ' '
@@ -27,3 +29,15 @@ require("autocmds")
 
 -- Set favorite colorscheme
 require("colorscheme")
+
+-- set layout 3 split
+vim.api.nvim_create_user_command('Layout', function ()
+  vim.cmd("vsplit")
+  vim.cmd("wincmd l")
+  vim.cmd("split")
+  vim.cmd("wincmd j")
+  vim.cmd("terminal")
+  vim.cmd("wincmd h")
+end, {})
+
+vim.opt.clipboard = "unnamedplus"
