@@ -247,6 +247,7 @@ return {
 		"rose-pine/neovim",
 		name = "rose-pine",
 		config = function()
+			require("config.rose-pine")
 			vim.cmd("colorscheme rose-pine")
 		end
 	}
