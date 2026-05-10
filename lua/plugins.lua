@@ -28,9 +28,17 @@ return {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 		},
+		opts = {
+			servers ={
+				clangd = {
+					mason = false,
+					-- raspberry pi 5
+					cmd = {"usr/bin/clangd"},
+				},
+			},
+		},
 		config = function() require("config.lsp") end,
 	},
-
 	{
 		"nvim-telescope/telescope.nvim",
 		event = "VeryLazy",

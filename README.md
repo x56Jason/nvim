@@ -37,6 +37,9 @@ Sometimes language servers may fail to install. Usually that is because of envir
 
 If it is C repo, the file compile_commands.json is needed for language server 'clangd' to work.
 
+for Raspberry Pi 5, see this
+[post](https://github.com/mason-org/mason-registry/issues/5800) (soft link)
+
 #### 3.1.1. Linux Kernel
 
 Run 'scripts/clang-tools/gen_compile_commands.py' after kernel compiling. This will generate compile_commands.json in the top directory.
