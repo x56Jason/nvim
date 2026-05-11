@@ -10,3 +10,7 @@ opt.signcolumn = "yes:1"
 opt.splitbelow = true
 opt.splitright = true
 opt.splitkeep = "screen"
+
+-- built-in statusline (replaces lualine)
+opt.laststatus = 2
+opt.statusline = " %f %m%r%= %l:%c  %p%%  %y "

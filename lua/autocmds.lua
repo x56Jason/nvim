@@ -66,6 +66,16 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
+-- Highlight trailing whitespace (lightweight replacement for highlight-whitespace plugin)
+vim.api.nvim_create_autocmd("ColorScheme", {
+  group = augroup("trailing_ws"),
+  callback = function()
+    vim.api.nvim_set_hl(0, "TrailingWhitespace", { bg = "#3a3a3a" })
+  end,
+})
+vim.api.nvim_set_hl(0, "TrailingWhitespace", { bg = "#3a3a3a" })
+vim.fn.matchadd("TrailingWhitespace", "\\s\\+$")
+
 vim.api.nvim_create_autocmd({"ColorScheme","BufReadPost"}, {
 	pattern = { "*patch.diff" },
 	callback = function()

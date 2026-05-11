@@ -43,7 +43,13 @@ map("i", "<c-f>", "<c-g>u<Esc>[s1z=`]a<c-g>u", default_options)
 map("x", "K", ":move '<-2<CR>gv-gv", default_options)
 map("x", "J", ":move '>+1<CR>gv-gv", default_options)
 
--- starlite mappings (handled by plugin keys spec)
+-- starlite mappings removed — use vim built-in * and #
+
+-- File explorer (netrw)
+map("n", "tt", "<cmd>Explore<CR>", default_options)
+
+-- Terminal
+map("n", "<C-n>", "<cmd>terminal<CR>", default_options)
 
 function EscapePair()
     local closers = {")", "]", "}", ">", "'", "\"", "`", ","}

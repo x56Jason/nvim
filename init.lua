@@ -26,8 +26,7 @@ require("options")
 -- Vim autocommands/autogroups
 require("autocmds")
 
--- Colorscheme picker (theme is set by rose-pine plugin)
-require("colorscheme")
+-- Colorscheme handled by rose-pine plugin
 
 -- set layout 3 split
 vim.api.nvim_create_user_command('Layout', function ()
