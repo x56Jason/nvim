@@ -18,7 +18,7 @@ cmp.setup {
 		{ name = "path" },
 	},
 	mapping = {
-		['<C-Space>'] = cmp.mapping.complete(),
+		['<C-o>'] = cmp.mapping.complete(),
 		['<Up>'] = cmp.mapping.select_prev_item(select_opts),
 		['<Down>'] = cmp.mapping.select_next_item(select_opts),
 
