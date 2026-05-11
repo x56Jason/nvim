@@ -13,7 +13,7 @@ local function do_telescope_colorscheme(opts)
 	local need_restore = true
 
 	--local colors = mycolorscheme.get_flavours()
-	local colors = opts or { "kanagawa-wave", "catppuccin-mocha", "tokyonight-night", }
+	local colors = opts or { "rose-pine-main", "rose-pine-moon", "rose-pine-dawn", }
 
 	local previewer
 	-- define previewer
@@ -81,19 +81,12 @@ end
 
 local function my_telescope_colorscheme()
 	do_telescope_colorscheme({
-		"kanagawa-wave",
-		"catppuccin-mocha",
-		"kanagawa-dragon",
-		"catppuccin-frappe",
-		"catppuccin-macchiato",
-		"catppuccin-latte",
-		"tokyonight-night",
+		"rose-pine-main",
+		"rose-pine-moon",
+		"rose-pine-dawn",
 	})
 end
 
 local default_options = {noremap = true, silent = true}
 
 vim.keymap.set("n", "fc", my_telescope_colorscheme, default_options)
-
-vim.cmd("colorscheme rose-pine")
--- vim.cmd("colorscheme monokai-pro")

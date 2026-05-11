@@ -1,22 +1,8 @@
 return {
 	{
-		"folke/tokyonight.nvim",
-		lazy = true,
-		config = function() require("config.tokyonight") end,
+		"rcarriga/nvim-notify",
+		event = "VeryLazy",
 	},
-	{
-		"rebelot/kanagawa.nvim",
-		lazy = true,
-		config = function() require("config.kanagawa") end,
-	},
-	{
-		"catppuccin/nvim",
-		name = "catppuccin",
-		lazy = true,
-		config = function() require("config.catppuccin") end,
-	},
-
-	{ "rcarriga/nvim-notify", },
 
 	{
 		"neovim/nvim-lspconfig",
@@ -64,7 +50,7 @@ return {
 
 	{
 		"nvim-lualine/lualine.nvim",
-		event = "VimEnter",
+		event = "VeryLazy",
 		dependencies = { "kyazdani42/nvim-web-devicons" },
 		config = function() require("config.lualine") end,
 	},
@@ -86,7 +72,6 @@ return {
 		dependencies = {
 			{ "onsails/lspkind-nvim" },
 			{ "hrsh7th/cmp-nvim-lsp" },
-			{ "hrsh7th/cmp-buffer" },
 			{ "hrsh7th/cmp-path" },
 			{ "L3MON4D3/LuaSnip" },
 			{ "saadparwaiz1/cmp_luasnip" },
@@ -116,7 +101,15 @@ return {
 		},
 	},
 
-	{ "ironhouzi/starlite-nvim" },
+	{
+		"ironhouzi/starlite-nvim",
+		keys = {
+			{ "*", "<cmd>lua require'starlite'.star()<CR>", desc = "Star search" },
+			{ "g*", "<cmd>lua require'starlite'.g_star()<CR>", desc = "g* search" },
+			{ "#", "<cmd>lua require'starlite'.hash()<CR>", desc = "Hash search" },
+			{ "g#", "<cmd>lua require'starlite'.g_hash()<CR>", desc = "g# search" },
+		},
+	},
 
 	{
 		"folke/which-key.nvim",
@@ -132,19 +125,22 @@ return {
 		config = function() require("config.nvim-window") end,
 	},
 
-	{ "tpope/vim-unimpaired" },
+	{ "tpope/vim-unimpaired", event = "VeryLazy" },
 	{
 		"tpope/vim-fugitive",
+		event = "VeryLazy",
 		config = function() require("config.fugitive") end,
 	},
 
 	{
 		"natecraddock/workspaces.nvim",
+		cmd = { "WorkspacesOpen", "WorkspacesAdd", "WorkspacesList", "WorkspacesRemove" },
 		config = function() require("config.workspaces") end,
 	},
 
 	{
 		"NvChad/nvim-colorizer.lua",
+		event = "BufReadPost",
 		opts = {
 			user_default_options = {
 				names = false,
@@ -156,11 +152,13 @@ return {
 	{
 		"echasnovski/mini.indentscope",
 		version = false,
+		event = "BufReadPost",
 		config = function() require("config.mini-indentscope") end,
 	},
 
 	{
 		"lukoshkin/highlight-whitespace",
+		event = "BufReadPost",
 		opts = {
 			tws = "\\s\\+$",
 			clear_on_bufleave = false,
@@ -176,6 +174,7 @@ return {
 
 	{
 		"x56Jason/glance.nvim",
+		cmd = "Glance",
 		opts = {
 			patchdiff = "diffonly",
 			q_quit_log = "off",
@@ -184,6 +183,7 @@ return {
 
 	{
 		"x56Jason/gitee.nvim",
+		cmd = "Gitee",
 		dependencies = { "x56Jason/glance.nvim" },
 		opts = {
 			token_file = "~/.token.gitee",
@@ -193,20 +193,33 @@ return {
 
 	{
 		"diepm/vim-rest-console",
+		ft = "rest",
 		config = function() require("config.vim-rest-console") end,
 	},
 
 	{
 		"ThePrimeagen/harpoon",
 		branch = "harpoon2",
+		keys = {
+			{ "m", desc = "Harpoon add file" },
+			{ "MM", desc = "Harpoon menu" },
+			{ "M1", desc = "Harpoon 1" },
+			{ "M2", desc = "Harpoon 2" },
+			{ "M3", desc = "Harpoon 3" },
+			{ "M4", desc = "Harpoon 4" },
+			{ "M5", desc = "Harpoon 5" },
+			{ "<TAB>", desc = "Next buffer" },
+			{ "<S-TAB>", desc = "Prev buffer" },
+		},
 		config = function() require("config.harpoon") end,
 	},
 
 	{
 		"j-hui/fidget.nvim",
+		event = "LspAttach",
 		config = true,
 	},
-	{ "tpope/vim-sleuth" },
+	{ "tpope/vim-sleuth", event = "BufReadPost" },
 
 	{
 		"jmacadie/telescope-hierarchy.nvim",
@@ -240,20 +253,14 @@ return {
 	},
 	{
 		"xiyaowong/transparent.nvim",
+		event = "VeryLazy",
 	},
-	{
-	  "loctvl842/monokai-pro.nvim",
-	  lazy = false,
-	  priority = 1000,
-	  config = function()
-	    require("monokai-pro").setup()
-	    --vim.cmd.colorscheme("monokai-pro")
-	  end,
-	},
-	-- lua/plugins/rose-pine.lua
+	-- colorscheme
 	{
 		"rose-pine/neovim",
 		name = "rose-pine",
+		lazy = false,
+		priority = 1000,
 		config = function()
 			require("config.rose-pine")
 			vim.cmd("colorscheme rose-pine")

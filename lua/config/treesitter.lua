@@ -9,8 +9,16 @@ require"nvim-treesitter.config".setup {
     }, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     ignore_install = {}, -- List of parsers to ignore installing
     highlight = {
-        enable = true, -- false will disable the whole extension
-        disable = {} -- list of language that will be disabled
+        enable = true,
+        additional_vim_regex_highlighting = false,
+        -- disable treesitter highlight on files larger than 100KB
+        disable = function(lang, buf)
+            local max_filesize = 100 * 1024 -- 100 KB
+            local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+            if ok and stats and stats.size > max_filesize then
+                return true
+            end
+        end,
     },
     incremental_selection = {
         enable = true,
@@ -19,7 +27,10 @@ require"nvim-treesitter.config".setup {
             node_decremental = "<S-TAB>"
         }
     },
-    indent = {enable = true},
+    indent = {
+        enable = true,
+        disable = { "c", "cpp" },
+    },
     autopairs = {{enable = true}},
     textobjects = {
         select = {
@@ -41,9 +52,4 @@ require"nvim-treesitter.config".setup {
             }
         }
     },
-    rainbow = {
-        enable = true,
-        extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-        max_file_lines = 2000 -- Do not enable for files with more than specified lines
-    }
 }

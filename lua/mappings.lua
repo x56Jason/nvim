@@ -43,11 +43,7 @@ map("i", "<c-f>", "<c-g>u<Esc>[s1z=`]a<c-g>u", default_options)
 map("x", "K", ":move '<-2<CR>gv-gv", default_options)
 map("x", "J", ":move '>+1<CR>gv-gv", default_options)
 
--- starlite mappings
-map("n", "*", "<cmd>lua require'starlite'.star()<CR>", default_options)
-map("n", "g*", "<cmd>lua require'starlite'.g_star()<CR>", default_options)
-map("n", "#", "<cmd>lua require'starlite'.hash()<CR>", default_options)
-map("n", "g#", "<cmd>lua require'starlite'.g_hash()<CR>", default_options)
+-- starlite mappings (handled by plugin keys spec)
 
 function EscapePair()
     local closers = {")", "]", "}", ">", "'", "\"", "`", ","}

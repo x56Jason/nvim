@@ -1,7 +1,5 @@
 -- mason/mason-lspconfig/nvim-lspconfig
 
-local nproc = vim.fn.systemlist("nproc")[1]
-
 local ensure_installed_servers = {
 	"lua_ls",
 }
@@ -11,12 +9,12 @@ local server_opts = {
 		cmd = {
 			"clangd",
 			"--header-insertion=never",
-			"-j=" .. nproc,
+			"-j=2",
 			"--completion-style=detailed",
 			"--function-arg-placeholders",
 			"--rename-file-limit=0",
 			"--background-index",
-			"--background-index-priority=normal",
+			"--background-index-priority=low",
 		},
 		filetypes = {"c", "cpp", "objc", "objcpp"},
 	},

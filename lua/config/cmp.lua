@@ -18,6 +18,14 @@ local function has_words_before()
 end
 
 cmp.setup {
+	performance = {
+		debounce = 150,        -- ms delay before triggering completion (default 60)
+		throttle = 60,         -- ms between completion updates (default 30)
+		max_view_entries = 30, -- limit rendered entries in the popup
+	},
+	completion = {
+		autocomplete = false,  -- disable auto-popup; trigger manually with <C-Space>
+	},
 	snippet = {
 		expand = function(args)
 			luasnip.lsp_expand(args.body)
@@ -25,11 +33,11 @@ cmp.setup {
 	},
 	sources = {
 		{ name = "luasnip" },
-		{ name = "nvim_lsp", keyword_length = 3 },
-		{ name = "buffer", keyword_length = 3 },
+		{ name = "nvim_lsp", keyword_length = 3, max_item_count = 30 },
 		{ name = "path" },
 	},
 	mapping = {
+		['<C-Space>'] = cmp.mapping.complete(), -- manual trigger
 		['<Up>'] = cmp.mapping.select_prev_item(select_opts),
 		['<Down>'] = cmp.mapping.select_next_item(select_opts),
 

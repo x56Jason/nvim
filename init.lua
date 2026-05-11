@@ -10,7 +10,6 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.termguicolors = true
-vim.cmd.colorscheme("default")
 vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = ' '
@@ -27,7 +26,7 @@ require("options")
 -- Vim autocommands/autogroups
 require("autocmds")
 
--- Set favorite colorscheme
+-- Colorscheme picker (theme is set by rose-pine plugin)
 require("colorscheme")
 
 -- set layout 3 split
@@ -39,5 +38,3 @@ vim.api.nvim_create_user_command('Layout', function ()
   vim.cmd("terminal")
   vim.cmd("wincmd h")
 end, {})
-
-vim.opt.clipboard = "unnamedplus"
