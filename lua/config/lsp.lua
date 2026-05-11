@@ -101,13 +101,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end
 })
 
--- Diagnostics
 vim.diagnostic.config({
-  float = { source = "always", border = "rounded" },
-  virtual_text = false,
+  virtual_text = {
+    severity = { min = vim.diagnostic.severity.WARN}, 
+    prefix = '●', -- Change the icon prefix
+    spacing = 4,   -- Add more space between the code and the warning
+  },
   underline = false,
   signs = true,
 })
+
 
 vim.keymap.set('n', '<C-E>', function()
 	-- If we find a floating window, close it.
