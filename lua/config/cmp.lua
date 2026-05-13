@@ -8,13 +8,10 @@ cmp.setup {
 	performance = {
 		debounce = 150,
 		throttle = 60,
-		max_view_entries = 30,
-	},
-	completion = {
-		autocomplete = false,  -- manual trigger only with <C-Space>
+		max_view_entries = 5,
 	},
 	sources = {
-		{ name = "nvim_lsp", keyword_length = 3, max_item_count = 30 },
+		{ name = "nvim_lsp", keyword_length = 3, max_item_count = 5 },
 		{ name = "path" },
 	},
 	mapping = {

@@ -9,7 +9,6 @@ local server_opts = {
 		cmd = {
 			"clangd",
 			"--header-insertion=never",
-			"-j=2",
 			"--completion-style=detailed",
 			"--function-arg-placeholders",
 			"--rename-file-limit=0",
