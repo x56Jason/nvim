@@ -5,6 +5,7 @@ local nproc = vim.fn.systemlist("nproc")[1]
 local ensure_installed_servers = {
 	"clangd",
 	"lua_ls",
+	"rust-analyzer",
 	"pylsp",
 }
 
@@ -51,6 +52,7 @@ local server_opts = {
 		cmd = { "pylsp" },
 		filetypes = { "python" }
 	},
+	["rust-analyzer"] = {},
 
 }
 
